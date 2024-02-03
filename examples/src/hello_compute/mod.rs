@@ -37,6 +37,12 @@ async fn execute_gpu(numbers: &[u32]) -> Option<Vec<u32>> {
     // Instantiates instance of WebGPU
     let instance = wgpu::Instance::default();
 
+    // Print the Adapter information
+    println!("Available adapters:");
+    for a in instance.enumerate_adapters(wgpu::Backends::all()) {
+        println!("    {:?}", a.get_info())
+    }
+
     // `request_adapter` instantiates the general connection to the GPU
     let adapter = instance
         .request_adapter(&wgpu::RequestAdapterOptions::default())
