@@ -153,6 +153,9 @@ async fn run(_path: Option<String>) {
     log::info!("GPU data copied to local.");
     output_staging_buffer.unmap();
 
+    // log the path
+    log::info!("Outputting image to path: {:?}", _path.clone().unwrap_or("in memory".to_string()));
+
     #[cfg(not(target_arch = "wasm32"))]
     output_image_native(texture_data.to_vec(), TEXTURE_DIMS, _path.unwrap());
     #[cfg(target_arch = "wasm32")]
@@ -169,7 +172,7 @@ pub fn main() {
             .init();
 
         let path = std::env::args()
-            .nth(1)
+            .nth(2)
             .unwrap_or_else(|| "please_don't_git_push_me.png".to_string());
         pollster::block_on(run(Some(path)));
     }

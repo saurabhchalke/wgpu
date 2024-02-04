@@ -1,4 +1,4 @@
-const MAX_ITERATIONS: u32 = 50u;
+const MAX_ITERATIONS: u32 = 100u;
 
 @group(0)
 @binding(0)
